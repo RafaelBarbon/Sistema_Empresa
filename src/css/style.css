@@ -1,0 +1,83 @@
+.imgs{
+    width: 100%;
+}
+
+body{
+    background-repeat: initial;
+    /*background-size: auto;*/
+    background-image: url(../../imgs/toracortada.webp);
+}
+
+.boxe{
+    background-image: url(../../imgs/tora.webp);
+    align-self: center;
+    color: white;
+    font-size: 200%;
+    text-align: center;
+}
+
+.boxe a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.boxelogin{
+    background-image: url(../../imgs/tora.webp);
+    align-self: center;
+    display: flexbox;
+    margin-top: 10%;
+    color: aliceblue;
+    text-align: center;
+}
+
+.myButton1 {
+	box-shadow: 6px -5px 0px 5px #9fb4f2;
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	background-color:#7892c2;
+	border-radius:5px;
+	border:2px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Courier New;
+	font-size:19px;
+	font-weight:bold;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:3px -3px 0px #283966;
+    width: 50%;
+}
+.myButton1:hover {
+	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background-color:#476e9e;
+}
+.myButton1:active {
+	position:relative;
+	top:1px;
+}
+
+.myButton2 {
+	box-shadow: 6px -5px 0px 5px #e2b26a;
+	background:linear-gradient(to bottom, #ce7a1b 5%, #cc7504 100%);
+	background-color:#f39f3f;
+	border-radius:5px;
+	border:2px solid #e96b3a;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Courier New;
+	font-size:19px;
+	font-weight:bold;
+	padding:12px 37px;
+	text-decoration:none;
+	text-shadow:3px -3px 0px #283966;
+    width: 50%;
+}
+.myButton2:hover {
+	background:linear-gradient(to bottom, #ac2323 5%, #c4570f 100%);
+	background-color:#476e9e;
+}
+.myButton2:active {
+	position:relative;
+	top:1px;
+}
