@@ -1,0 +1,243 @@
+.u-section-1 .u-sheet-1 {
+  min-height: 578px;
+}
+
+.u-section-1 .u-text-1 {
+  margin: 63px 489px 0 444px;
+}
+
+.u-section-1 .u-list-1 {
+  grid-template-rows: auto;
+  width: 1140px;
+  margin: 62px auto 60px;
+}
+
+.u-section-1 .u-repeater-1 {
+  grid-template-columns: repeat(3, calc(33.3333% - 6.66667px));
+  min-height: 315px;
+  grid-gap: 10px;
+}
+
+.u-section-1 .u-list-item-1 {
+  transition-duration: 5.5s;
+  box-shadow: 2px 0 0 0 rgba(0,0,0,0);
+  background-image: none;
+  animation-duration: 1000ms;
+}
+
+.u-section-1 .u-container-layout-1 {
+  padding: 30px;
+}
+
+.u-section-1 .u-icon-1 {
+  height: 64px;
+  width: 64px;
+  color: rgb(17, 17, 17) !important;
+  transition-duration: 0.5s;
+  background-image: none;
+  margin: 0 auto;
+}
+
+.u-section-1 .u-text-2 {
+  margin: 30px auto 0;
+}
+
+.u-section-1 .u-text-3 {
+  margin: 20px 0 0;
+}
+
+.u-section-1 .u-list-item-2 {
+  transition-duration: 5.5s;
+  box-shadow: 2px 0 0 0 rgba(0,0,0,0);
+  background-image: none;
+  animation-duration: 1000ms;
+}
+
+.u-section-1 .u-container-layout-2 {
+  padding: 30px;
+}
+
+.u-section-1 .u-icon-2 {
+  height: 64px;
+  width: 64px;
+  transition-duration: 0.5s;
+  background-image: none;
+  margin: 0 auto;
+}
+
+.u-section-1 .u-text-4 {
+  margin: 30px auto 0;
+}
+
+.u-section-1 .u-text-5 {
+  margin: 20px 0 0;
+}
+
+.u-section-1 .u-list-item-3 {
+  transition-duration: 5.5s;
+  box-shadow: 2px 0 0 0 rgba(0,0,0,0);
+  background-image: none;
+  animation-duration: 1000ms;
+}
+
+.u-section-1 .u-container-layout-3 {
+  padding: 30px;
+}
+
+.u-section-1 .u-icon-3 {
+  height: 64px;
+  width: 64px;
+  color: rgb(17, 17, 17) !important;
+  transition-duration: 0.5s;
+  background-image: none;
+  margin: 0 auto;
+}
+
+.u-section-1 .u-text-6 {
+  margin: 30px auto 0;
+}
+
+.u-section-1 .u-text-7 {
+  margin: 20px 0 0;
+}
+
+@media (max-width: 1199px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 484px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-left: 344px;
+    margin-right: 389px;
+    width: 207px;
+  }
+
+  .u-section-1 .u-list-1 {
+    height: auto;
+    width: 940px;
+  }
+}
+
+@media (max-width: 991px) {
+  .u-section-1 .u-sheet-1 {
+    min-height: 820px;
+  }
+
+  .u-section-1 .u-text-1 {
+    margin-left: 234px;
+    margin-right: 279px;
+  }
+
+  .u-section-1 .u-list-1 {
+    width: 720px;
+  }
+
+  .u-section-1 .u-repeater-1 {
+    grid-template-columns: repeat(2, calc(50% - 5px));
+  }
+}
+
+@media (max-width: 767px) {
+  .u-section-1 .u-text-1 {
+    margin-left: 144px;
+    margin-right: 189px;
+  }
+
+  .u-section-1 .u-list-1 {
+    width: 540px;
+  }
+
+  .u-section-1 .u-repeater-1 {
+    grid-template-columns: repeat(1, 100%);
+  }
+
+  .u-section-1 .u-container-layout-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-1 .u-container-layout-2 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .u-section-1 .u-container-layout-3 {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+@media (max-width: 575px) {
+  .u-section-1 .u-text-1 {
+    margin-left: 44px;
+    margin-right: 89px;
+  }
+
+  .u-section-1 .u-list-1 {
+    width: 340px;
+  }
+}
+
+.u-section-1 .u-list-item-1 {
+  transition-property: fill, color, background-image, stroke-width, border-style, border-width, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-size, background-position !important;
+}
+
+.u-section-1 .u-list-item-1:hover {
+  box-shadow: 2px 2px 8px 0 rgba(128,128,128,1) !important;
+  background-image: linear-gradient(#e9f2fa, #f2f2f2) !important;
+  background-image: none !important;
+}
+
+.u-section-1 .u-list-item-3 {
+  transition-property: fill, color, background-image, stroke-width, border-style, border-width, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-size, background-position !important;
+}
+
+.u-section-1 .u-list-item-3:hover {
+  box-shadow: 2px 2px 8px 0 rgba(128,128,128,1) !important;
+  background-image: linear-gradient(#e9f2fa, #f2f2f2) !important;
+  background-image: none !important;
+}
+
+.u-section-1 .u-list-item-2 {
+  transition-property: fill, color, background-image, stroke-width, border-style, border-width, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-size, background-position !important;
+}
+
+.u-section-1 .u-list-item-2:hover {
+  box-shadow: 2px 2px 8px 0 rgba(128,128,128,1) !important;
+  background-image: linear-gradient(#e9f2fa, #f2f2f2) !important;
+  background-image: none !important;
+}
+
+.u-section-1 .u-icon-1 {
+  transition-property: fill, color, background-image, stroke-width, border-style, border-width, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-size, background-position !important;
+}
+
+.u-section-1 .u-icon-1:hover {
+  background-image: linear-gradient(#e9f2fa, #e9f2fa) !important;
+  background-image: none !important;
+}
+
+.u-section-1 .u-icon-2 {
+  transition-property: fill, color, background-image, stroke-width, border-style, border-width, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-size, background-position !important;
+}
+
+.u-section-1 .u-icon-2:hover {
+  background-image: linear-gradient(#e9f2fa, #e9f2fa) !important;
+  background-image: none !important;
+}
+
+.u-section-1 .u-icon-3 {
+  transition-property: fill, color, background-image, stroke-width, border-style, border-width, box-shadow, text-shadow, opacity, border-radius, stroke, border-color, font-size, font-style, font-weight, text-decoration, letter-spacing, transform, background-size, background-position !important;
+}
+
+.u-section-1 .u-icon-3:hover {
+  background-image: linear-gradient(#e9f2fa, #e9f2fa) !important;
+  background-image: none !important;
+} .u-section-2 {
+  background-image: url("../imgs/corte4.jpg");
+  background-position: 50% 50%;
+}
+
+.u-section-2 .u-sheet-1 {
+  min-height: 500px;
+}
