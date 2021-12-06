@@ -3,7 +3,7 @@ class Adm{
         this._email = email;
         this._senha = senha;
     }
-    
+
     get email(){
         return this._email;
     }
@@ -62,13 +62,13 @@ async function get_adm() {
 function loginADM(email,senha){
     var user = new Adm(email,senha);
     //var userbd = get_adm();// Coletar do banco de dados
-    
+
     const admCol = collection(db, 'adm');
   const admSnapshot = await getDocs(admCol);
   const adm = admSnapshot.docs.map(doc => doc.data());
-    
-    
+
+
     console.log(adm);
    // Criar um novo obj
-   // Comparar os objs 
+   // Comparar os objs
 }

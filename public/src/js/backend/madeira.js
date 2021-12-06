@@ -17,7 +17,7 @@ class Madeira{
     get preco(){
         return this._preco;
     }
-    
+
     set codigo(codigo){
         this._cod = codigo;
     }
