@@ -1,3 +1,4 @@
+let database = window.database;
 function login_adm(){
     var log = document.getElementById("username-adm").value;
     var sen = document.getElementById("password-adm").value;
@@ -34,3 +35,12 @@ function seja_nosso_cliente(){
         // email ou senha incorreta
     }
 }
+
+function listar_pedidosA(){
+    
+    console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar 
+    
+    //console.log(pedidos_aberto);
+    //texto.value = pedidos_aberto;
+}
+

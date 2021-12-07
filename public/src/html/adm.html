@@ -10,6 +10,8 @@
     <link rel="shortcut icon" href="../imgs/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/nicepage.css" media="screen">
     <link rel="stylesheet" href="../css/adm.css" media="screen">
+    <script type="module" referrerpolicy="unsafe-url" src="../js/backend/database.js"></script>
+    <script type="text/javascript" src="../js/backend/interface.js"></script>
     <script class="u-script" type="text/javascript" src="../js/jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="../js/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.0.3, nicepage.com">
@@ -67,10 +69,10 @@
         <div class="u-container-style u-expanded-width u-gradient u-group u-group-1">
           <div class="u-container-layout u-valign-top u-container-layout-1">
             <h1 class="u-text u-text-default u-title u-text-1">Visualização</h1>
-            <a href="https://nicepage.one" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-grey-50 u-btn-1">VISUALIZAR CLIENTES</a>
-            <a href="https://nicepage.one" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-grey-50 u-btn-2">VISUALIZAR MADEIRA</a>
-            <a href="https://nicepage.one" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-grey-50 u-btn-3">VISUALIZAR PEDIDOS EM ABERTO</a>
-            <a href="https://nicepage.one" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-grey-50 u-btn-4">VISUALIZAR HISTÓRICO DE PEDIDOS</a>
+            <input type="button" value="VISUALIZAR CLIENTES" onclick="listar_pedidosA()" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-grey-50 u-btn-1"></input>
+            <input type="button" value="VISUALIZAR MADEIRA" onclick="listar_pedidosA()" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-grey-50 u-btn-2"></input>
+            <input type="button" value="VISUALIZAR PEDIDOS EM ABERTO" onclick="listar_pedidosA()" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-grey-50 u-btn-3"></input>
+            <input type="button" value="VISUALIZAR HISTÓRICO DE PEDIDOS" onclick="listar_pedidosA()" class="u-border-none u-btn u-button-style u-custom-color-2 u-hover-grey-50 u-btn-4"></input>
           </div>
         </div>
       </div>
@@ -78,12 +80,12 @@
     <section class="u-clearfix u-gradient u-section-2" id="sec-977c">
       <div class="u-clearfix u-sheet u-sheet-1">
         <div class="u-expanded-width u-form u-gradient u-form-1">
-          <form action="#" method="POST" class="u-clearfix u-form-spacing-0 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;">
+          <!--<form action="#" method="POST" class="u-clearfix u-form-spacing-0 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 0px;">-->
             <div class="u-form-group u-form-message">
               <label for="message-7767" class="u-form-control-hidden u-label"></label>
-              <textarea rows="15" cols="50" id="message-7767" name="message" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" readonly></textarea>
+              <textarea rows="15" cols="50" id="adm-textarea" name="message" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white u-input-1" readonly></textarea>
             </div>
-          </form>
+          <!--</form>-->
         </div>
       </div>
     </section>
