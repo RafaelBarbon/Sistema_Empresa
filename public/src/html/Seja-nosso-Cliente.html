@@ -10,6 +10,9 @@
     <link rel="shortcut icon" href="../imgs/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../css/nicepage.css" media="screen">
     <link rel="stylesheet" href="../css/Seja-nosso-Cliente.css" media="screen">
+    <script type="module" src="../js/backend/database.js"></script>
+    <script type="text/javascript" src="../js/backend/cliente.js"></script>
+    <script type="text/javascript" src="../js/backend/interface.js"></script>
     <script class="u-script" type="text/javascript" src="../js/jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="../js/nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 4.0.3, nicepage.com">
@@ -40,9 +43,9 @@
           </div>
           <div class="u-custom-menu u-nav-container">
             <ul class="u-nav u-spacing-2 u-unstyled u-nav-1"><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-custom-color-3 u-nav-link u-text-active-white u-text-body-alt-color u-text-hover-grey-90" href="Home.html" style="padding: 10px 20px;">Home</a>
-              </li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-custom-color-3 u-nav-link u-text-active-white u-text-body-alt-color u-text-hover-grey-90" href="Area-do-Cliente.html" style="padding: 10px 20px;">Área do Cliente</a>
+              </li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-custom-color-3 u-nav-link u-text-active-white u-text-body-alt-color u-text-hover-grey-90" href="Cliente_log.html" style="padding: 10px 20px;">Área do Cliente</a>
               </li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-custom-color-3 u-nav-link u-text-active-white u-text-body-alt-color u-text-hover-grey-90" href="Seja-nosso-Cliente.html" style="padding: 10px 20px;">Seja nosso Cliente</a>
-              </li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-custom-color-3 u-nav-link u-text-active-white u-text-body-alt-color u-text-hover-grey-90" href="Administracao.html" style="padding: 10px 20px;">Administração</a>
+              </li><li class="u-nav-item"><a class="u-border-2 u-border-active-grey-90 u-border-hover-grey-50 u-button-style u-custom-color-3 u-nav-link u-text-active-white u-text-body-alt-color u-text-hover-grey-90" href="adm.html" style="padding: 10px 20px;">Administração</a>
               </li>
             </ul>
           </div>
@@ -51,9 +54,9 @@
               <div class="u-inner-container-layout u-sidenav-overflow">
                 <div class="u-menu-close"></div>
                 <ul class="u-align-center u-nav u-popupmenu-items u-unstyled u-nav-2"><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Home.html" style="padding: 10px 20px;">Home</a>
-                  </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Area-do-Cliente.html" style="padding: 10px 20px;">Área do Cliente</a>
+                  </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Cliente_log.html" style="padding: 10px 20px;">Área do Cliente</a>
                   </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Seja-nosso-Cliente.html" style="padding: 10px 20px;">Seja nosso Cliente</a>
-                  </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="Administracao.html" style="padding: 10px 20px;">Administração</a>
+                  </li><li class="u-nav-item"><a class="u-button-style u-nav-link" href="adm.html" style="padding: 10px 20px;">Administração</a>
                   </li>
                 </ul>
               </div>
@@ -68,41 +71,40 @@
         <div class="u-form u-form-1">
           <form action="#" method="POST" class="u-clearfix u-form-spacing-10 u-form-vertical u-inner-form" source="custom" name="form" style="padding: 10px;">
             <div class="u-form-group u-form-name">
-              <label for="name-63bc" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="Nome" id="name-63bc" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+              <label for="cadastro-nome" class="u-form-control-hidden u-label"></label>
+              <input type="text" placeholder="Nome" id="cadastro-nome" name="name" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
             </div>
             <div class="u-form-group u-form-group-2">
-              <label for="text-6090" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="CNPJ" pattern="^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$" id="text-6090" name="cnpj" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+              <label for="cadastro-CNPJ" class="u-form-control-hidden u-label"></label>
+              <input type="text" placeholder="CNPJ" pattern="^\d{14}$" id="cadastro-CNPJ" name="cnpj" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
             </div>
             <div class="u-form-address u-form-group u-form-group-3">
-              <label for="address-b161" class="u-form-control-hidden u-label"></label>
-              <input type="text" placeholder="Endereço" id="address-b161" name="endereço" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+              <label for="cadastro-endereco" class="u-form-control-hidden u-label"></label>
+              <input type="text" placeholder="Endereço" id="cadastro-endereco" name="endereço" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
             </div>
             <div class="u-form-group u-form-phone u-form-group-4">
-              <label for="phone-585c" class="u-form-control-hidden u-label"></label>
-              <input type="tel" pattern="^\(\d{2}\)\s\d{4,5}-?\d{4}$" placeholder="Telefone (ex. (19) 99555-2675)" id="phone-585c" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+              <label for="cadastro-tel" class="u-form-control-hidden u-label"></label>
+              <input type="tel" pattern="^\(\d{2}\)\s\d{4,5}-?\d{4}$" placeholder="Telefone (ex. (19) 99555-2675)" id="cadastro-tel" name="phone" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
             </div>
             <div class="u-form-email u-form-group">
-              <label for="email-63bc" class="u-form-control-hidden u-label"></label>
-              <input type="email" placeholder="Email" id="email-63bc" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="required">
+              <label for="cadastro-email" class="u-form-control-hidden u-label"></label>
+              <input type="email" placeholder="Email" id="cadastro-email" name="email" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
             </div>
             <div class="u-form-group u-form-group-6">
-              <label for="text-b681" class="u-form-control-hidden u-label"></label>
-              <input type="password" placeholder="Senha" id="text-b681" name="senha" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+              <label for="cadastro-senha" class="u-form-control-hidden u-label"></label>
+              <input type="password" placeholder="Senha" id="cadastro-senha" name="senha" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
             </div>
             <div class="u-form-group u-form-group-7">
-              <label for="text-f1cc" class="u-form-control-hidden u-label"></label>
-              <input type="password" placeholder="Confirma Senha" id="text-f1cc" name="confirmasenha" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required="">
+              <label for="cadastro-senhaconf" class="u-form-control-hidden u-label"></label>
+              <input type="password" placeholder="Confirma Senha" id="cadastro-senhaconf" name="confirmasenha" class="u-border-1 u-border-grey-30 u-input u-input-rectangle u-white" required>
             </div>
             <div class="u-align-left u-form-group u-form-submit">
-              <a href="#" class="u-border-2 u-border-custom-color-2 u-btn u-btn-submit u-button-style u-hover-custom-color-1 u-none u-text-black u-text-hover-white u-btn-1">REGISTRAR<br>
-              </a>
-              <input type="submit" value="submit" class="u-form-control-hidden">
+              <a onclick="seja_nosso_cliente()" class="u-border-2 u-border-custom-color-2 u-btn u-btn-submit u-button-style u-hover-custom-color-1 u-none u-text-black u-text-hover-white u-btn-1">REGISTRAR</a><br>
+              <!--<input type="button" value="submit" class="u-form-control-hidden">-->
             </div>
-            <div class="u-form-send-message u-form-send-success"> Obrigado! Seu formulário foi enviado. </div>
+            <!--<div class="u-form-send-message u-form-send-success"> Obrigado! Seu formulário foi enviado. </div>
             <div class="u-form-send-error u-form-send-message"> Não foi possível enviar. Corrija os erros e tente novamente. </div>
-            <input type="hidden" value="" name="recaptchaResponse">
+            <input type="hidden" value="" name="recaptchaResponse">-->
           </form>
         </div>
       </div>

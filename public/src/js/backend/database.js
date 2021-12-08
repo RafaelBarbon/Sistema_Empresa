@@ -15,7 +15,6 @@ class Database{
             appId: "1:825841875347:web:3b03279f3ddd2531969066",
             measurementId: "G-QCPV70M0JM"
         };
-        
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         //const analytics = getAnalytics(app);
@@ -23,7 +22,8 @@ class Database{
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
-    //gera
+//gera
+    /*
     insert_gera(nota, pedido){
     const db = getDatabase();
     set(ref(db, "gera/" + num),{
@@ -64,9 +64,9 @@ class Database{
         .then(function(){return true;})
         .catch(function(error){return false;});
     }
+*/
 
-
-    //realiza pedido
+ /*   //realiza pedido
     insert_realizapedido(num, cod, cnpj){
     const db = getDatabase();
     set(ref(db, "realizapedidos/" + num),{
@@ -107,11 +107,11 @@ class Database{
         .then(function(){return true;})
         .catch(function(error){return false;});
     }
-
+*/
     //cliente
-    insert_cliente(num, nome, senha, email, tel, endereco){
+    insert_cliente(num, nome, senha, email, tel, endereco){//OK
         const db = getDatabase();
-        set(ref(db, "clientes/" + num),{
+        set(ref(db, "Clientes/" + num),{
             Email: email,
             Senha: senha,
             Telefone: tel,
@@ -121,7 +121,7 @@ class Database{
             .then(function(){return true;})
             .catch(function(error){return false;});
     }
-
+/*
     select_cliente(num){ ///funciona
         const db2 = ref(getDatabase());
         get(child(db2,"clientes/" + num))
@@ -135,10 +135,10 @@ class Database{
             })
             .catch((error)=>{alert(error)});
     }
-
+*/
     update_cliente(num, nome, senha, email, tel, endereco){
         const db = getDatabase();
-        update(ref(db, "clientes/" + num),{
+        update(ref(db, "Clientes/" + num),{//OK
             Email: email,
             Senha: senha,
             Telefone: tel,
@@ -149,18 +149,18 @@ class Database{
             .catch(function(error){return false;});
     }
 
-    remove_cliente(num){
+    remove_cliente(num){//OK
         const db = getDatabase();
-        remove(ref(db, "clientes/" + num))
+        remove(ref(db, "Clientes/" + num))
             .then(function(){return true;})
             .catch(function(error){return false;});
     }
 
 
     //madeira
-    insert_madeira(num, preco, idade, tipo){
+    insert_madeira(num, preco, idade, tipo){//OK
     const db = getDatabase();
-    set(ref(db, "madeira/" + num),{
+    set(ref(db, "Madeira/" + num),{
         Preco: preco,
         Idade: idade,
         Tipo: tipo
@@ -169,9 +169,10 @@ class Database{
         .catch(function(error){return false;});
     }
 
+    /*
     select_madeira(num){ ///funciona
         const db2 = ref(getDatabase());
-        get(child(db2,"madeira/" + num))
+        get(child(db2,"Madeira/" + num))
             .then((snapshot)=>{
                 if(snapshot.exists()){
                     return snapshot.val();
@@ -182,10 +183,10 @@ class Database{
             })
             .catch((error)=>{alert(error)});
     }
-
-    update_madeira(num, preco, idade, tipo){
+*/
+    update_madeira(num, preco, idade, tipo){//OK
     const db = getDatabase();
-    update(ref(db, "madeira/" + num),{
+    update(ref(db, "Madeira/" + num),{
         Preco: preco,
         Idade: idade,
         Tipo: tipo
@@ -194,37 +195,75 @@ class Database{
         .catch(function(error){return false;});
     }
 
-    remove_madeira(num){
+    remove_madeira(num){//OK
     const db = getDatabase();
-    remove(ref(db, "madeira/" + num))
+    remove(ref(db, "Madeira/" + num))
         .then(function(){return true;})
         .catch(function(error){return false;});
     }
 
     //Historico pedidos
-    insert_historicopedido(num, valor){
+    insert_historicopedido(cnpj, num, quantidade, data){//OK
     const db = getDatabase();
-    set(ref(db, "historicopedidos/" + num),{
-        Valor: valor
+
+    set(ref(db, "Clientes/" + cnpj +"/Historicopedidos/" + num),{
+        Quantidade: quantidade, 
+        Data: data
     })
         .then(function(){return true;})
         .catch(function(error){return false;});
     }
 
-    select_historicopedido(num){ ///funciona
+    select_historicopedidoALL(num){ ///OK
         const db2 = ref(getDatabase());
+        //this.insert_pedido('10','20');
+        get(child(db2,"Clientes/"))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    var out = snapshot.val();
+                    var txt = "";
+                    for(var element in out){//Para cada cliente(CNPJ)
+                        //
+                        txt += `Cliente(CNPJ)  ${element}`;
+                        pedidos = element.Historicopedidos
+                        for(var pedido in pedidos){
+                            txt += `\n - Número do pedido ${pedido} - Data: ${pedidos[pedido].Data} - Quantidade: ${pedidos[pedido].Quantidade} m³.\n`;
+                        }
+                    }
+                    var texto = document.getElementById("adm-textarea");
+                    texto.value = txt;
+                }
+                else{
+                    alert("Dado nao encontrado");
+                }
+            })
+            .catch((error)=>{alert(error);});
+        
+
+
+        
+        //VERSÃO ANTERIOR
+        /*const db2 = ref(getDatabase());
         get(child(db2,"pedidos/" + num))
             .then((snapshot)=>{
                 if(snapshot.exists()){
-                    return snapshot.val();
+                    var out = snapshot.val();
+                    var txt = "";
+                    for(var element in out){
+                        txt += `Número do pedido ${element} - Data: ${out[element].Data} - Duração: ${out[element].Quantidade} m³.\n`;
+                    }
+                    var texto = document.getElementById("adm-textarea");
+                    texto.value = txt;
                 }
                 else{
                     alert("Dado nao encontrado");
                 }
             })
             .catch((error)=>{alert(error)});
-    }
+            */
 
+    }
+/*
     update_historicopedido(num, valor){
     const db = getDatabase();
     update(ref(db, "historicopedidos/" + num),{
@@ -240,12 +279,13 @@ class Database{
         .then(function(){return true;})
         .catch(function(error){return false;});
     }
-
-    //Nota_Fiscal
-    insert_notafiscal(valortotal, quantidade, num, data, valormetro){
+*/
+    //Nota_Fiscal(Deverá ser Inserida depois adicionar o pedido )
+    //Cliente -> Historico pedido -> pedido(Numero) -> Insere a nota fiscal
+    insert_notafiscal(cnpj, numpedido, valortotal, quantidade, num, data, valormetro){//OK
     const db = getDatabase();
-    set(ref(db, "notafiscal/" + num),{
-        ValorTotal: valortotal,
+    set(ref(db, "Cliente/" + cnpj + "/Historicopedidos" + "/Notafiscal/" + num),{
+        ValorTotal: valortotal,///REVER
         Quantidade: quantidade,
         Data: data,
         ValorMetro: valormetro
@@ -254,6 +294,7 @@ class Database{
         .catch(function(error){return false;});
     }
 
+    /*
     select_notafiscal(num){ ///funciona
         const db2 = ref(getDatabase());
         get(child(db2,"notafiscal/" + num))
@@ -267,10 +308,11 @@ class Database{
             })
             .catch((error)=>{alert(error)});
     }
+    */
 
-    update_notafiscal(valortotal, quantidade, num, data, valormetro){
+    update_notafiscal(cnpj, numpedido, valortotal, quantidade, num, data, valormetro){//OK
     const db = getDatabase();
-    update(ref(db, "notafiscal/" + num),{
+    update(ref(db, "Clientes/Historicopedidos/" + numpedido + "/Notafiscal/" + num),{
         ValorTotal: valortotal,
         Quantidade: quantidade,
         Data: data,
@@ -279,65 +321,121 @@ class Database{
         .then(function(){return true;})
         .catch(function(error){return false;});
     }
-
+    /*
     remove_notafiscal(num){
     const db = getDatabase();
     remove(ref(db, "notafiscal/" + num))
         .then(function(){return true;})
         .catch(function(error){return false;});
     }
+    */
 
-    //Pedidos
-    insert_pedido(num, duracao, data){
-        const db = getDatabase();
-        set(ref(db, "pedidos/" + num),{
-            Duracao: duracao,
-            Data: data
-        })
-            .then(function(){return true;})
-            .catch(function(error){return false;});
+    select_index(){
+        const db2 = ref(getDatabase());
+        
     }
 
-    select_pedidosALL(){ ///funciona
+    update_index(num){
+        const db = getDatabase();
+        
+    }
+
+    //Pedidos
+    insert_pedido(cnpj, quantidade, data){ //OK
+        const db = getDatabase();
+        let i;
+        var index;
+        get(child(ref(db),"Index/")) // Coleta index do pedido
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    index = snapshot.val();
+                    //Insere um pedido
+                    set(ref(db, "Clientes/" + cnpj + "/Pedidos/" + index),{ // Cria pedido com base no index
+                        Quantidade: quantidade,
+                        Data: data
+                    })
+                        .then(function(){
+                            update(ref(db, "Index/"),{ // Atualiza index
+                                Valor: index+1
+                            })
+                            .then(function(){return true;})
+                            .catch(function(error){return false;});
+                            return true;
+                        })
+                        .catch(function(error){return false;});
+
+                }
+            })
+            .catch((error)=>{alert(error)});
+        //console.log("numero: "+i);
+    }
+
+    select_pedidosALL(){// OK 
         const db2 = ref(getDatabase());
-        let ret = get(child(db2,"pedidos/"))
+        //this.insert_pedido('10','20');
+        get(child(db2,"Clientes/"))
             .then((snapshot)=>{
                 if(snapshot.exists()){
                     var out = snapshot.val();
-                    console.log(out);
-                    //return out;
-
+                    var txt = "";
+                    for(var element in out){//Para cada cliente(CNPJ)
+                        //
+                        txt += `Cliente(CNPJ)  ${element}`;
+                        pedidos = element.Pedidos
+                        for(var pedido in pedidos){
+                            txt += `\n - Número do pedido ${pedido} - Data: ${pedidos[pedido].Data} - Quantidade: ${pedidos[pedido].Quantidade} m³.\n`;
+                        }
+                    }
                     var texto = document.getElementById("adm-textarea");
-                    texto.value = "Data:" + out[1].Data;////Rever 
-                    return out[1].Data;
+                    texto.value = txt;
                 }
                 else{
                     alert("Dado nao encontrado");
                 }
             })
-            .catch((error)=>{alert(error); console.log("ERRO")});
-        //return null;
-        //console.log(ret.getValue());
-        //return info2;
-    }
+            .catch((error)=>{alert(error);});
 
-    select_pedidos(num){ ///funciona
+
+        /*Vrs. anterior
         const db2 = ref(getDatabase());
-        get(child(db2,"pedidos/" + num))
+        //this.insert_pedido('10','20');
+        get(child(db2,"pedidos/"))
             .then((snapshot)=>{
                 if(snapshot.exists()){
-                    return snapshot.val();
+                    var out = snapshot.val();
+                    var txt = "";
+                    for(var element in out){
+                        txt += `Número do pedido ${element} - Data: ${out[element].Data} - Quantidade: ${out[element].Quantidade} m³.\n`;
+                    }
+                    var texto = document.getElementById("adm-textarea");
+                    texto.value = txt;
                 }
                 else{
                     alert("Dado nao encontrado");
+                }
+            })
+            .catch((error)=>{alert(error);});
+            */
+    }
+
+    select_pedidos(cnpj, num){ ///OK(FALTA MANIPULAR)
+        const db2 = ref(getDatabase());
+        get(child(db2,"Clientes/"+ cnpj+ "/Pedidos/" + num))
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    //###
+                    return true;
+                }
+                else{
+                    return false;
                 }
             })
             .catch((error)=>{alert(error)});
     }
 
-    update_pedido(num, duracao, data){
+    update_pedido(cnpj, num, duracao, data){//OK
         const db = getDatabase();
-        update(ref(db, "pedidos/" + num),{
+        update(ref(db, "Clientes" + cnpj + "/Pedidos/" + num),{
             Duracao: duracao,
             Data: data
         })
@@ -345,10 +443,16 @@ class Database{
             .catch(function(error){return false;});
     }
 
-    remove_pedido(num){
+    remove_pedido(cnpj, num){//OK
         const db = getDatabase();
-        remove(ref(db, "pedidos/" + num))
-            .then(function(){return true;})
+        /*if(this.select_pedidos(num)){
+            this.insert_historicopedido(num);
+        }*/
+        remove(ref(db, "Clientes/" + cnpj + "/Pedidos/" + num))
+            .then(function(){
+                //insert_historicopedido(num);
+                return true;
+            })
             .catch(function(error){return false;});
     }
 

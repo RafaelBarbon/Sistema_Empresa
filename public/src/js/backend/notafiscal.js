@@ -6,7 +6,7 @@ class Notafiscal{
         this._valor_metro = valor_metro;
         this._valor_total = valor_total;
     }
-    get data(data){
+    get data(){
         return this._data;
     }
     set data(data){

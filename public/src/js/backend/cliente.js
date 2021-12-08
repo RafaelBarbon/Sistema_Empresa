@@ -65,6 +65,18 @@ class Cliente{
         this._senha = senha;
     }
 
+    loginCliente(log,sen){
+        console.log("eeee");
+        return true;
+        if(log == this._cnpj && sen == this._senha)
+            return true;
+        return false;
+    }
 
+}
+
+var cliente = new Cliente("RAFA", "PUC", "tel", "36055667000160", "cep", "email", "123");
+
+function cadastro(nome, email, CNPJ,endereco,tel,senha,senhaconf){
 
 }

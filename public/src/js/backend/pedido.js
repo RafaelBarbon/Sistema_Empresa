@@ -1,20 +1,20 @@
 class Pedido{
-    constructor(numero, duracao, data){
-        this._nome = nome;
-        this._duracao = duracao;
+    constructor(numero, quantidade, data){
+        this._numero = numero;
+        this._quantidade = quantidade;
         this._data = data;
     }
-    get nome(){
-        return this._nome;
+    get numero(){
+        return this._numero;
     }
-    set nome(nome){
-        this._nome = nome;
+    set numero(numero){
+        this._numero = numero;
     }
-    get duracao(){
-        return this._duracao;
+    get quantidade(){
+        return this._quantidade;
     }
-    set duracao(duracao){
-        this._duracao = duracao;
+    set quantidade(quantidade){
+        this._quantidade = quantidade;
     }
     get data(){
         return this._data;
