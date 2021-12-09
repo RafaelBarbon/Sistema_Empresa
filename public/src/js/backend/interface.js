@@ -17,7 +17,7 @@ function login_adm(){
 function login_cliente(){
     var log = document.getElementById("cliente_CNPJ").value;
     var sen = document.getElementById("cliente_senha").value;
-    if(cliente.loginCliente(log, sen)){
+    if(loginCliente(log, sen)){
 
         //Troca visualização
         document.getElementById("logincli").style.visibility = "hidden";
@@ -39,8 +39,8 @@ function seja_nosso_cliente(){
     var senhaconf = document.getElementById("cadastro-senhaconf").value;
 
     if(senha == senhaconf){
-        if(cadastro(nome, email, CNPJ,endereco,tel,senha,senhaconf)){
-            //Troca pagina
+        if(cadastro(nome, email, CNPJ,endereco,tel,senha)){
+            alert("Cliente cadastrado!");
         }
         else{
             alert("Dados incorretos ou já existentes.");
@@ -55,74 +55,178 @@ function seja_nosso_cliente(){
 
 // Textarea - exibição
 function listar_pedidosA(){
-    var painel = document.getElementById("adm-textarea");
-    console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+    if(ADM.email != null){ // Confere se está logado
+        var painel = document.getElementById("adm-textarea");
+        var txt = listar_pedidos_abertos();
+        painel.value = txt;
+        console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
 
-    //console.log(pedidos_aberto);
-    //texto.value = pedidos_aberto;
+        //console.log(pedidos_aberto);
+        //texto.value = pedidos_aberto;
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 function listar_clientes(){
-    var painel = document.getElementById("adm-textarea");
-    console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+    if(ADM.email != null){ // Confere se está logado
+        var painel = document.getElementById("adm-textarea");
+        var txt = listar_consumidores();
+        painel.value = txt;
+        console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 function listar_madeira(){
-    var painel = document.getElementById("adm-textarea");
-    console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+    if(ADM.email != null){ // Confere se está logado
+        var painel = document.getElementById("adm-textarea");
+        var txt = listar_madeiras();
+        painel.value = txt;
+        console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 function listar_pedidosH(){
-    var painel = document.getElementById("adm-textarea");
-    console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+    if(ADM.email != null){ // Confere se está logado
+        var painel = document.getElementById("adm-textarea");
+        var txt = listar_pedidos_fechados();
+        painel.value = txt;
+        console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 // Manipulação dos pedidos
 function atender_pedido(){
-    var num = document.getElementById("adm-atender_pedido").value;
+    if(ADM._email != null){
+        var num = document.getElementById("adm-atender_pedido").value;
+        if(atender_ped(num)){
+            alert("Pedido atendido");
+        }
+        else{
+            alert("Pedido não encontrado");
+        }
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 function excluir_pedido(){
-    var num = document.getElementById("adm-excluir_pedido").value;
-    console.log("foi");
-    window.database.remove_pedido(num);
+    if(ADM.email != null){
+        var num = document.getElementById("adm-excluir_pedido").value;
+        window.database.remove_pedido(num);
+        if(excluir_ped(num)){
+            alert("Pedido excluído.");
+        }
+        else{
+            alert("Pedido não encontrado.");
+        }
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 // Manipulação das madeiras
 function madeira_add(){
-    var num = document.getElementById("adm-num_madeira_add").value;
-    var preco = document.getElementById("adm-preco_madeira_add").value;
-    var tipo = document.getElementById("adm-tipo_madeira_add").value;
-    var idade = document.getElementById("adm-idade_madeira_add").value;
-
+    if(ADM._email != null){
+        var num = document.getElementById("adm-num_madeira_add").value;
+        var preco = document.getElementById("adm-preco_madeira_add").value;
+        var tipo = document.getElementById("adm-tipo_madeira_add").value;
+        var idade = document.getElementById("adm-idade_madeira_add").value;
+        if(adicionar_madeira(num,preco,tipo,idade)){
+            alert("Madeira adicionada.");
+        }
+        else{
+            alert("Erro ao adicionar a madeira: mesmo número utilizado.");
+        }
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 function madeira_att(){
-    var num = document.getElementById("adm-num_madeira_att").value;
-    var preco = document.getElementById("adm-preco_madeira_att").value;
-    var tipo = document.getElementById("adm-tipo_madeira_att").value;
-    var idade = document.getElementById("adm-idade_madeira_att").value;
-
+    if(ADM._email != null){
+        var num = document.getElementById("adm-num_madeira_att").value;
+        var preco = document.getElementById("adm-preco_madeira_att").value;
+        var tipo = document.getElementById("adm-tipo_madeira_att").value;
+        var idade = document.getElementById("adm-idade_madeira_att").value;
+        if(atualizar_madeira(num,preco,tipo,idade)){
+            alert("Madeira atualizada.");
+        }
+        else{
+            alert("Erro ao atualizar a madeira: número não encontrado.");
+        }
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 function madeira_del(){
-    var num = document.getElementById("adm-num_madeira_del").value;
+    if(ADM._email != null){
+        var num = document.getElementById("adm-num_madeira_del").value;
+        if(remover_madeira(num)){
+            alert("Madeira removida.");
+        }
+        else{
+            alert("Madeira não removida.");
+        }
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 // Funções do cliente (logadas)
 
 function realizar_pedido(){
-    var m3 = document.getElementById("cliente-m3_pedido").value;
-    var data = document.getElementById("cliente-data_pedido").value;
-    window.database.insert_pedido(m3,data);
+    if(cliente.cnpj != null){ // Confere se o cliente está logado
+        var m3 = document.getElementById("cliente-m3_pedido").value;
+        var data = document.getElementById("cliente-data_pedido").value;
+        if(fazer_pedido()){
+            alert("Pedido realizado.");
+        }
+        else{
+            alert("Erro ao realizar o pedido.");
+        }
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 // Textarea
 function pedidos_abertos(){
-    var painel = document.getElementById("cliente-pedidosA");
+    if(cliente.cnpj != null){ // Confere se o cliente está logado
+        var painel = document.getElementById("cliente-pedidosA");
+        var txt = pedidos_em_aberto();
+        painel.value = txt;
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }
 
 // Textarea
 function pedidos_concluidos(){
-    var painel = document.getElementById("cliente-pedidosH");
+    if(cliente.cnpj != null){ // Confere se o cliente está logado
+        var painel = document.getElementById("cliente-pedidosH");
+        var txt = pedidos_historico();
+        painel.value = txt;
+    }
+    else{
+        alert("Faça login para utilizar este recurso.");
+    }
 }

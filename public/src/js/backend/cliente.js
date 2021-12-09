@@ -1,10 +1,9 @@
 class Cliente{
-    constructor(nome, end, tel, cnpj, cep, email, senha){
+    constructor(nome, end, tel, cnpj, email, senha){
         this._nome = nome;
         this._endereco = end;
         this._telefone = tel;
         this._cnpj = cnpj;
-        this._cep = cep;
         this._email = email;
         this._senha = senha;
     }
@@ -41,14 +40,6 @@ class Cliente{
         this._cnpj = cnpj;
     }
 
-    get cep(){
-        return this._cep;
-    }
-
-    set cep(cep){
-        this._cep = cep;
-    }
-
     get email(){
         return this._email;
     }
@@ -65,18 +56,43 @@ class Cliente{
         this._senha = senha;
     }
 
-    loginCliente(log,sen){
-        console.log("eeee");
-        return true;
-        if(log == this._cnpj && sen == this._senha)
-            return true;
-        return false;
+    info(){
+        return "Nome: " + this._nome + " Email: " + this._email + "\nTelefone: " + this._telefone + " CNPJ: " + this._cnpj + "\nEndereço: " + this._endereco + ".\n";
     }
-
 }
 
-var cliente = new Cliente("RAFA", "PUC", "tel", "36055667000160", "cep", "email", "123");
+var cliente = new Cliente(null,null,null,null,null,null);
 
-function cadastro(nome, email, CNPJ,endereco,tel,senha,senhaconf){
+function cadastro(nome, email, CNPJ,endereco,tel,senha){
+    var existe;// TODO Tenta procurar o CNPJ no banco de dados
+    if(existe == CNPJ)
+        return false;
+    else{ // TODO Cadastra no banco de dados as informações
+        return true;
+    }
+}
 
+function loginCliente(log,sen){
+    return true;
+    var cnpj,senha,email,end,nome,tel; // TODO coleta do banco de dados
+    if(log == cnpj && sen == senha){
+        cliente.cnpj = cnpj;
+        cliente.senha = senha;
+        cliente.email = email;
+        cliente.endereco = end;
+        cliente.nome = nome;
+        cliente.telefone = tel;
+        return true;
+    }
+    return false;
+}
+
+function listar_consumidores(){
+    var clientes; // TODO coletar do banco de dados as informações de todos os consumidores
+    var txt = "";
+    /*
+    A cada consumidor, atualizar as informações do OBJ e chamar o método para imprimir as informações do mesmo
+    */
+    txt += cliente.info();
+    return txt;
 }

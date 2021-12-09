@@ -19,16 +19,15 @@ class Adm{
 
     loginADM(email,senha){
         var user = new Adm(email,senha);
-        //var userbd = get_adm();// Coletar do banco de dados
-        return true;
+        var emaildb, senhadb;
+        //var userbd = get_adm();// TODO Coletar do banco de dados
+        if(email == emailbd && senha == senhabd){
+            this._email = email;
+            this._senha = senha;
+            return true;
+        }
         return false;
-
-
-
-
-       // Criar um novo obj
-       // Comparar os objs
     }
 }
 
-var ADM = new Adm();
+var ADM = new Adm(null,null);
