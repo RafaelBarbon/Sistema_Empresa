@@ -31,22 +31,26 @@ var pedido = new Pedido(null,null,null);
 
 // Funções de pedidos para um cliente
 
-function fazer_pedido(qnt,data){
+function fazer_pedido(cnpj, qnt,data){
     // TODO criar novo pedido no banco de dados
-    window.database.insert_pedido(m3,data); // TODO insere no banco de dados
+    window.database.insert_pedido(cnpj,qnt,data); // TODO insere no banco de dados
     return true;
     return false;
 }
 
-function pedidos_em_aberto(){
+async function pedidos_em_aberto(cnpj){
     //TODO coleta do banco de dados os pedidos de um cliente
     var pedidos;
     var infos = "";
+    var ret = window.database.select_pedidos(cnpj);
+    var retorno = await ret;
+    return retorno;
     /*
+    
     A cada pedido, substitui as infos do obj e chama o método de retorno das infos de um pedido
     */
-    infos += pedido.info_do_pedido();
-    return infos;
+    //infos += pedido.info_do_pedido();
+    //return infos;
 }
 
 function pedidos_historico(){

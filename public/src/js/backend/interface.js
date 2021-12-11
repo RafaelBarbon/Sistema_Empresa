@@ -3,7 +3,16 @@ function login_adm(){
     var log = document.getElementById("adm-email").value;
     var sen = document.getElementById("adm-password").value;
 
-    if(ADM.loginADM(log, sen)){
+    ADM.loginADM(log, sen).then(function(resul){
+        if(resul === true){
+            document.getElementById("admlogin").style.visibility = "hidden";
+            document.getElementById("admswap").style.visibility = "visible";
+        }
+        else{
+            alert("Email ou senha incorretos");
+        }
+    });
+    /*if(ADM.loginADM(log, sen)){
         //Troca vizualização
         document.getElementById("admlogin").style.visibility = "hidden";
         document.getElementById("admswap").style.visibility = "visible";
@@ -11,12 +20,26 @@ function login_adm(){
     }
     else{
         alert("Email ou senha incorretos");
-    }
+    }*/
 }
 
 function login_cliente(){
     var log = document.getElementById("cliente_CNPJ").value;
     var sen = document.getElementById("cliente_senha").value;
+    loginCliente(log, sen).then(function(resul){
+        //Troca visualização
+        if(resul == true){
+            document.getElementById("logincli").style.visibility = "hidden";
+            document.getElementById("swapcli").style.visibility = "visible";
+        }else{
+            alert("CNPJ ou senha incorretos");
+        }
+    })
+    .catch(function(error){
+        alert(error);
+    })
+
+    /*
     if(loginCliente(log, sen)){
 
         //Troca visualização
@@ -26,6 +49,7 @@ function login_cliente(){
     else{
         alert("CNPJ ou senha incorretos");
     }
+    */
 }
 
 // Cadastro de cliente
@@ -39,12 +63,14 @@ function seja_nosso_cliente(){
     var senhaconf = document.getElementById("cadastro-senhaconf").value;
 
     if(senha == senhaconf){
-        if(cadastro(nome, email, CNPJ,endereco,tel,senha)){
-            alert("Cliente cadastrado!");
-        }
-        else{
-            alert("Dados incorretos ou já existentes.");
-        }
+        cadastro(nome, email, CNPJ,endereco,tel,senha).then(function(ret){
+            if(ret == true){
+                alert("Cliente cadastrado!");
+            }
+            else{
+                alert("Dados incorretos ou já existentes.");
+            }
+        })
     }
     else{
         alert("Senhas não são iguais, tente novamente.");
@@ -195,7 +221,7 @@ function realizar_pedido(){
     if(cliente.cnpj != null){ // Confere se o cliente está logado
         var m3 = document.getElementById("cliente-m3_pedido").value;
         var data = document.getElementById("cliente-data_pedido").value;
-        if(fazer_pedido()){
+        if(fazer_pedido(cliente.cnpj, m3, data)){
             alert("Pedido realizado.");
         }
         else{
@@ -210,9 +236,16 @@ function realizar_pedido(){
 // Textarea
 function pedidos_abertos(){
     if(cliente.cnpj != null){ // Confere se o cliente está logado
+        /*
         var painel = document.getElementById("cliente-pedidosA");
-        var txt = pedidos_em_aberto();
+        pedidos_em_aberto(cliente.cnpj).then(function(pedidos){
+            var txt = "";
+            for(var ped in pedidos){
+                txt += "\nNumero:" + ped.
+            }
+        })
         painel.value = txt;
+        */
     }
     else{
         alert("Faça login para utilizar este recurso.");

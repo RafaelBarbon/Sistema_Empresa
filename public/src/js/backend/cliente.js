@@ -63,28 +63,48 @@ class Cliente{
 
 var cliente = new Cliente(null,null,null,null,null,null);
 
-function cadastro(nome, email, CNPJ,endereco,tel,senha){
-    var existe;// TODO Tenta procurar o CNPJ no banco de dados
-    if(existe == CNPJ)
+async function cadastro(nome, email, CNPJ,endereco,tel,senha){
+    //var existe;// TODO Tenta procurar o CNPJ no banco de dados
+    let db = window.database;
+    var ret;
+    ret = db.get_cliente(CNPJ).then(function(resul){
+        if(resul == false){
+            db.insert_cliente(CNPJ, nome, senha, email, tel, endereco);//OK
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+    var retorno = await ret;
+    return retorno;
+    
+    /*if(existe == CNPJ)
         return false;
     else{ // TODO Cadastra no banco de dados as informações
         return true;
-    }
+    }*/
 }
 
-function loginCliente(log,sen){
-    return true;
-    var cnpj,senha,email,end,nome,tel; // TODO coleta do banco de dados
-    if(log == cnpj && sen == senha){
-        cliente.cnpj = cnpj;
-        cliente.senha = senha;
-        cliente.email = email;
-        cliente.endereco = end;
-        cliente.nome = nome;
-        cliente.telefone = tel;
-        return true;
-    }
-    return false;
+async function loginCliente(log,sen){
+    let db = window.database;
+    var ret;
+    ret = db.get_cliente(log).then(function(resul){
+        if(resul.Senha == sen){
+            cliente.cnpj = log;
+            cliente.senha = resul.Senha;
+            cliente.email = resul.Email;
+            cliente.endereco = resul.Endereco;
+            cliente.nome = resul.Nome;
+            cliente.telefone = resul.Telefone;
+            return true;
+        }
+        else{
+            return false;
+        }
+    });
+    var retorno = await ret;
+    return retorno;
 }
 
 function listar_consumidores(){

@@ -19,9 +19,38 @@ class Database{
         const app = initializeApp(firebaseConfig);
         //const analytics = getAnalytics(app);
     }
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 
+    async get_adm(op){//OK
+        const db2 = ref(getDatabase());
+        var ret;
+        //if(op == 1){
+            ret = get(child(db2,"Admlog"))//retorna uma promise
+                .then((snapshot)=>{
+                    if(snapshot.exists()){
+                        return snapshot.val();
+                    }
+                    else{
+                        alert("Dado nao encontrado");
+                    }
+                })
+                .catch((error)=>{alert(error)});
+            var resul = await ret;
+            return resul;
+        /*}else{
+            get(child(db2,"Admlog/Senha"))
+                .then((snapshot)=>{
+                    if(snapshot.exists()){
+                        var ret = snapshot.val();
+                    }
+                    else{
+                        alert("Dado nao encontrado");
+                    }
+                })
+                .catch((error)=>{alert(error)});
+            var resul = await ret;
+            return resul;
+        }*/
+    }
 //gera
     /*
     insert_gera(nota, pedido){
@@ -109,7 +138,25 @@ class Database{
     }
 */
     //cliente
-    insert_cliente(num, nome, senha, email, tel, endereco){//OK
+
+    async get_cliente(cnpj){//OK
+        const db2 = ref(getDatabase());
+        var ret;
+        ret = get(child(db2,"Clientes/" + cnpj))//retorna uma promise
+            .then((snapshot)=>{
+                if(snapshot.exists()){
+                    return snapshot.val();
+                }
+                else{
+                    return false;
+                }
+            })
+            .catch((error)=>{alert(error)});
+        var resul = await ret;
+        return resul;
+    }
+
+    async insert_cliente(num, nome, senha, email, tel, endereco){//OK
         const db = getDatabase();
         set(ref(db, "Clientes/" + num),{
             Email: email,
@@ -330,45 +377,44 @@ class Database{
     }
     */
 
-    select_index(){
-        const db2 = ref(getDatabase());
-        
+    async select_index(){
+        const db = getDatabase();
+        var ret = get(child(ref(db),"Index/")).then(function(snapshot){
+                if(snapshot.exists()){
+                    return snapshot.val();
+                }
+            });
+        var resul = await ret;
+        return resul;
     }
 
-    update_index(num){
+    async update_index(num){
         const db = getDatabase();
-        
+        update(ref(db, "Index"),{
+            Valor: num
+        })
+            .then(function(){return true;})
+            .catch(function(error){return false;});
     }
 
     //Pedidos
-    insert_pedido(cnpj, quantidade, data){ //OK
+    insert_pedido(cnpj, quantidade, data){
         const db = getDatabase();
-        let i;
-        var index;
-        get(child(ref(db),"Index/")) // Coleta index do pedido
-            .then((snapshot)=>{
-                if(snapshot.exists()){
-                    index = snapshot.val();
-                    //Insere um pedido
-                    set(ref(db, "Clientes/" + cnpj + "/Pedidos/" + index),{ // Cria pedido com base no index
-                        Quantidade: quantidade,
-                        Data: data
-                    })
-                        .then(function(){
-                            update(ref(db, "Index/"),{ // Atualiza index
-                                Valor: index+1
-                            })
-                            .then(function(){return true;})
-                            .catch(function(error){return false;});
-                            return true;
-                        })
-                        .catch(function(error){return false;});
+        var ind = this.select_index().then(function(ind){
+            //console.log(ind);
+            var ret = set(ref(db, "Clientes/" + cnpj + "/Pedidos/" + ind.Valor),{ // Cria pedido com base no index
+                Quantidade: quantidade,
+                Data: data
+            }).then(function(){
+                var valor = ind.Valor + 1;
+                update(ref(db, "Index"),{
+                    Valor: valor
+                })
 
-                }
             })
-            .catch((error)=>{alert(error)});
-        //console.log("numero: "+i);
+        })
     }
+
 
     select_pedidosALL(){// OK 
         const db2 = ref(getDatabase());
@@ -418,19 +464,21 @@ class Database{
             */
     }
 
-    select_pedidos(cnpj, num){ ///OK(FALTA MANIPULAR)
+    async select_pedidos(cnpj){ ///OK(FALTA MANIPULAR)
         const db2 = ref(getDatabase());
-        get(child(db2,"Clientes/"+ cnpj+ "/Pedidos/" + num))
+        var ret = get(child(db2,"Clientes/"+ cnpj+ "/Pedidos"))
             .then((snapshot)=>{
                 if(snapshot.exists()){
                     //###
-                    return true;
+                    return snapshot.value;
                 }
                 else{
                     return false;
                 }
             })
             .catch((error)=>{alert(error)});
+        var retorno = await ret;
+        return retorno;
     }
 
     update_pedido(cnpj, num, duracao, data){//OK

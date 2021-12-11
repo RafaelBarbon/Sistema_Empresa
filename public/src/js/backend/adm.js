@@ -17,16 +17,20 @@ class Adm{
         return this._senha = senha;
     }
 
-    loginADM(email,senha){
+    async loginADM(email,senha){
+        let db = window.database;
         var user = new Adm(email,senha);
         var emaildb, senhadb;
-        //var userbd = get_adm();// TODO Coletar do banco de dados
-        if(email == emailbd && senha == senhabd){
-            this._email = email;
-            this._senha = senha;
-            return true;
-        }
-        return false;
+        var resul = db.get_adm().then(function(response){ 
+            if(email == response.Email && senha == response.Senha){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }); 
+        var ret = await resul;
+        return ret;
     }
 }
 
