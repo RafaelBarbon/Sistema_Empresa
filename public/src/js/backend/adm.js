@@ -19,10 +19,12 @@ class Adm{
 
     async loginADM(email,senha){
         let db = window.database;
-        var user = new Adm(email,senha);
-        var emaildb, senhadb;
+        //var user = new Adm(email,senha);
+        //var emaildb, senhadb;
         var resul = db.get_adm().then(function(response){ 
             if(email == response.Email && senha == response.Senha){
+                ADM._email = email;
+                ADM._senha = senha;
                 return true;
             }
             else{

@@ -249,6 +249,20 @@ class Database{
         .catch(function(error){return false;});
     }
 
+
+
+    async select_pedidos_historico(cnpj){ ///OK(FALTA MANIPULAR)
+        const db = getDatabase();
+        var ret = get(child(ref(db),"Clientes/" + cnpj+"/Historicopedidos/")).then(function(snapshot){
+                if(snapshot.exists()){
+                    //console.log(snapshot.val());
+                    return snapshot.val();
+                }
+            });
+        var resul = await ret;
+        return resul;
+    }
+
     //Historico pedidos
     insert_historicopedido(cnpj, num, quantidade, data){//OK
     const db = getDatabase();
@@ -465,20 +479,19 @@ class Database{
     }
 
     async select_pedidos(cnpj){ ///OK(FALTA MANIPULAR)
-        const db2 = ref(getDatabase());
-        var ret = get(child(db2,"Clientes/"+ cnpj+ "/Pedidos"))
-            .then((snapshot)=>{
+        const db = getDatabase();
+        var ret = get(child(ref(db),"Clientes/" + cnpj+"/Pedidos")).then(function(snapshot){
                 if(snapshot.exists()){
-                    //###
-                    return snapshot.value;
-                }
-                else{
+                    //console.log(snapshot.val());
+                    return snapshot.val();
+                }else{
                     return false;
                 }
             })
-            .catch((error)=>{alert(error)});
-        var retorno = await ret;
-        return retorno;
+            .catch(function(){console.log("Catch do select)pedidos");return false;});
+        var resul = await ret;
+        console.log(resul);
+        return resul;
     }
 
     update_pedido(cnpj, num, duracao, data){//OK
@@ -491,20 +504,48 @@ class Database{
             .catch(function(error){return false;});
     }
 
-    remove_pedido(cnpj, num){//OK
+    async remove_pedido(num){//OK
         const db = getDatabase();
-        /*if(this.select_pedidos(num)){
-            this.insert_historicopedido(num);
-        }*/
-        remove(ref(db, "Clientes/" + cnpj + "/Pedidos/" + num))
+        var ret = window.database.busca_pedido(num).than(function(cnpj){
+            return remove(ref(db, "Clientes/" + cnpj + "/Pedidos/" + num))
             .then(function(){
                 //insert_historicopedido(num);
                 return true;
             })
             .catch(function(error){return false;});
+        })
+        var retorno = await ret;
+        /*if(this.select_pedidos(num)){
+            this.insert_historicopedido(num);
+        }*/
+        
     }
 
-
+    async busca_pedido(num){//Retorna o cnpj do pedido
+        const db = getDatabase();
+        var rett = get(child(ref(db),"Clientes/")).then(function(snapshot){
+                if(snapshot.exists()){
+                    var c = null;
+                    console.log(snapshot.val());
+                    var client = snapshot.val();
+                    for(cliente in client){
+                        //var c = clientes[cliente];
+                        ///var rettp;
+                        //console.log(client[cliente].Pedidos[num]);
+                        if(client[cliente].Pedidos != null && client[cliente].Pedidos[num] != null){
+                            c = cliente;
+                        }else{
+                            c = c;
+                        }
+                    }
+                    return c;
+                }else{
+                    return null;
+                }
+            });
+        var result = await rett;
+        return result;
+    }
 }
 /*
 // Import the functions you need from the SDKs you need

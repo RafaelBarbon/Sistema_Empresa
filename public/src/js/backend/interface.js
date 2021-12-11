@@ -132,31 +132,33 @@ function listar_pedidosH(){
 }
 
 // Manipulação dos pedidos
-function atender_pedido(){
+function atender_pedido(){///ERROOOOO
     if(ADM._email != null){
         var num = document.getElementById("adm-atender_pedido").value;
-        if(atender_ped(num)){
-            alert("Pedido atendido");
-        }
-        else{
-            alert("Pedido não encontrado");
-        }
+        atender_pedido(num).than(function(ret){
+            if(ret == true){
+                alert("Pedido atendido");
+            }else{
+                alert("Pedido não encontrado");
+            }
+        })
     }
     else{
         alert("Faça login para utilizar este recurso.");
     }
 }
 
-function excluir_pedido(){
+function excluir_pedido(){//Esta chamando direto do bd(Arrumar)
     if(ADM.email != null){
         var num = document.getElementById("adm-excluir_pedido").value;
-        window.database.remove_pedido(num);
-        if(excluir_ped(num)){
-            alert("Pedido excluído.");
-        }
-        else{
-            alert("Pedido não encontrado.");
-        }
+        database.remove_pedido(num).than(function(ret){
+            if(ret == true){
+                alert("Pedido excluído.");
+            }
+            else{
+                alert("Pedido não encontrado.");
+            }
+        });
     }
     else{
         alert("Faça login para utilizar este recurso.");
@@ -236,16 +238,12 @@ function realizar_pedido(){
 // Textarea
 function pedidos_abertos(){
     if(cliente.cnpj != null){ // Confere se o cliente está logado
-        /*
+        
         var painel = document.getElementById("cliente-pedidosA");
         pedidos_em_aberto(cliente.cnpj).then(function(pedidos){
-            var txt = "";
-            for(var ped in pedidos){
-                txt += "\nNumero:" + ped.
-            }
+            painel.value = pedidos;
         })
-        painel.value = txt;
-        */
+        //painel.value = txt;
     }
     else{
         alert("Faça login para utilizar este recurso.");
@@ -256,8 +254,9 @@ function pedidos_abertos(){
 function pedidos_concluidos(){
     if(cliente.cnpj != null){ // Confere se o cliente está logado
         var painel = document.getElementById("cliente-pedidosH");
-        var txt = pedidos_historico();
-        painel.value = txt;
+        pedidos_historico(cliente.cnpj).then(function(pedidos){
+            painel.value = pedidos;
+        })
     }
     else{
         alert("Faça login para utilizar este recurso.");
