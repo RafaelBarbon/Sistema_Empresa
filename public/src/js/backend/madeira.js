@@ -32,7 +32,7 @@ class Madeira{
     }
 
     info(){
-        return "Código: " + this._cod + " Tipo: " + this._tipo + " Preço: R$ " + this._preco + " Idade: " + this._idade + " meses.\n";
+        return "Código: " + this._cod + " Tipo: " + this._tipo + " Preço: R$ " + this._preco + " Idade: " + this._idade + " meses.\n\n";
     }
 }
 
@@ -42,10 +42,10 @@ async function listar_madeiras(){
     var infos = "";
     var ret = window.database.get_madeira().then(function(madeiras){
         for(mad in madeiras){
-            madeira._cod = madeiras[mad].Codigo;
+            madeira._cod = mad;
             madeira._idade = madeiras[mad].Idade;
             madeira._preco = madeiras[mad].Valor;
-            madeira._tipo = mad;
+            madeira._tipo = madeiras[mad].Tipo;
             infos += madeira.info();
         }
         return infos;
@@ -60,21 +60,23 @@ async function listar_madeiras(){
     //return infos;
 }
 
-function remover_madeira(num){
-    var wood; // TODO coletar do banco de dados
-    // TODO remover a madeira do banco de dados
-    return true;
-    return false;
+async function remover_madeira(num){
+    ret = window.database.remove_madeira(num).then(function(){return true;})
+    .catch(function(){return false;})
+    retorno = await ret 
+    return retorno;
 }
 
 async function adicionar_madeira(num,preco,tipo,idade){
     var ret = window.database.insert_madeira(num,preco,idade,tipo).then(function (){return true;})
+    .catch(function(){return false;})
     var retorno = await ret;
     return retorno;
 }
 
 async function atualizar_madeira(num,preco,tipo,idade){
     var ret = window.database.update_madeira(num,preco,idade,tipo).then(function (){return true;})
+    .catch(function(){return false});
     var retorno = await ret;
     return retorno;
 }

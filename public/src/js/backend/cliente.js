@@ -57,7 +57,7 @@ class Cliente{
     }
 
     info(){
-        return "Nome: " + this._nome + " Email: " + this._email + "\nTelefone: " + this._telefone + " CNPJ: " + this._cnpj + "\nEndereço: " + this._endereco + ".\n";
+        return "Nome: " + this._nome + " Email: " + this._email + "\nTelefone: " + this._telefone + " CNPJ: " + this._cnpj + "\nEndereço: " + this._endereco + ".\n\n";
     }
 }
 
@@ -108,13 +108,17 @@ async function loginCliente(log,sen){
 }
 
 async function listar_consumidores(){
-    var clientes; // TODO coletar do banco de dados as informações de todos os consumidores
-    var txt = "";
     let database = window.database;
     var ret = database.get_clientes().then(function(clientes){
             var txt = "";
-            for(var cliente in clientes){
-                txt += "\nCNPJ: " + cliente + "Nome: " + clientes[cliente].Nome;
+            for(var cliente1 in clientes){
+                cliente.cnpj = cliente1;
+                cliente.senha = clientes[cliente1].Senha;
+                cliente.email = clientes[cliente1].Email;
+                cliente.endereco = clientes[cliente1].Endereco;
+                cliente.nome = clientes[cliente1].Nome;
+                cliente.telefone = clientes[cliente1].Telefone;
+                txt += cliente.info();
             }
             return txt;
         })
