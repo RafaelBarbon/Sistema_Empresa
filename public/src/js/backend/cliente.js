@@ -107,12 +107,22 @@ async function loginCliente(log,sen){
     return retorno;
 }
 
-function listar_consumidores(){
+async function listar_consumidores(){
     var clientes; // TODO coletar do banco de dados as informações de todos os consumidores
     var txt = "";
+    let database = window.database;
+    var ret = database.get_clientes().then(function(clientes){
+            var txt = "";
+            for(var cliente in clientes){
+                txt += "\nCNPJ: " + cliente + "Nome: " + clientes[cliente].Nome;
+            }
+            return txt;
+        })
+    var retorno = await ret;
+    return retorno;
     /*
     A cada consumidor, atualizar as informações do OBJ e chamar o método para imprimir as informações do mesmo
     */
-    txt += cliente.info();
-    return txt;
+    //txt += cliente.info();
+    //return txt;
 }

@@ -82,13 +82,7 @@ function seja_nosso_cliente(){
 // Textarea - exibição
 function listar_pedidosA(){
     if(ADM.email != null){ // Confere se está logado
-        var painel = document.getElementById("adm-textarea");
-        var txt = listar_pedidos_abertos();
-        painel.value = txt;
-        console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
-
-        //console.log(pedidos_aberto);
-        //texto.value = pedidos_aberto;
+        listar_pedidos_abertos();
     }
     else{
         alert("Faça login para utilizar este recurso.");
@@ -97,10 +91,10 @@ function listar_pedidosA(){
 
 function listar_clientes(){
     if(ADM.email != null){ // Confere se está logado
-        var painel = document.getElementById("adm-textarea");
-        var txt = listar_consumidores();
-        painel.value = txt;
-        console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+        listar_consumidores().then(function(clientes){
+            var painel = document.getElementById("adm-textarea");
+            painel.value = clientes;
+        })
     }
     else{
         alert("Faça login para utilizar este recurso.");
@@ -110,9 +104,10 @@ function listar_clientes(){
 function listar_madeira(){
     if(ADM.email != null){ // Confere se está logado
         var painel = document.getElementById("adm-textarea");
-        var txt = listar_madeiras();
-        painel.value = txt;
-        console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+        listar_madeiras().then(function(info){
+            console.log(info);
+            painel.value = info;
+        });
     }
     else{
         alert("Faça login para utilizar este recurso.");
@@ -121,10 +116,7 @@ function listar_madeira(){
 
 function listar_pedidosH(){
     if(ADM.email != null){ // Confere se está logado
-        var painel = document.getElementById("adm-textarea");
-        var txt = listar_pedidos_fechados();
-        painel.value = txt;
-        console.log("Retorno:"+ window.database.select_pedidosALL());//Nao fuciona retornar
+        listar_pedidos_fechados();
     }
     else{
         alert("Faça login para utilizar este recurso.");
@@ -172,12 +164,13 @@ function madeira_add(){
         var preco = document.getElementById("adm-preco_madeira_add").value;
         var tipo = document.getElementById("adm-tipo_madeira_add").value;
         var idade = document.getElementById("adm-idade_madeira_add").value;
-        if(adicionar_madeira(num,preco,tipo,idade)){
-            alert("Madeira adicionada.");
-        }
-        else{
-            alert("Erro ao adicionar a madeira: mesmo número utilizado.");
-        }
+        adicionar_madeira(num,preco,tipo,idade).then(function(ret){
+            if(ret == true){
+                alert("Madeira adicionada.");
+            }else{
+                alert("Erro ao adicionar a madeira: mesmo número utilizado.");
+            }
+        });
     }
     else{
         alert("Faça login para utilizar este recurso.");
@@ -190,12 +183,14 @@ function madeira_att(){
         var preco = document.getElementById("adm-preco_madeira_att").value;
         var tipo = document.getElementById("adm-tipo_madeira_att").value;
         var idade = document.getElementById("adm-idade_madeira_att").value;
-        if(atualizar_madeira(num,preco,tipo,idade)){
-            alert("Madeira atualizada.");
-        }
-        else{
-            alert("Erro ao atualizar a madeira: número não encontrado.");
-        }
+        atualizar_madeira(num,preco,tipo,idade).then(function(ret){
+            if(ret == true){
+                alert("Madeira atualizada.");
+            }
+            else{
+                alert("Erro ao atualizar a madeira: número não encontrado.");
+            }
+        })
     }
     else{
         alert("Faça login para utilizar este recurso.");

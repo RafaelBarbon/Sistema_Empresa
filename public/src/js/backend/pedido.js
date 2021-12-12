@@ -88,26 +88,101 @@ async function pedidos_historico(cnpj){
 
 // Funções de pedidos para ADM
 
-function listar_pedidos_abertos(){
+async function listar_pedidos_abertos(){
     var pedidosA;
     // TODO coleta do banco de dados todos os pedidos em aberto de todos os clientes
-    var infos = "";
+   
+    var ret = window.database.get_clientes().then(function(clientes){
+        //Função anonima que retorna os pedidos de cada cliente
+        var retrn = async function(clien){
+            var r = window.database.select_pedidos(clien).then(function(pedidos){
+                //console.log(pedidos);
+                var inf = "";
+                for(ped in pedidos){
+                    pedido._data = pedidos[ped].Data;
+                    pedido._numero = ped;
+                    pedido._quantidade = pedidos[ped].Quantidade;
+                    inf += pedido.info_do_pedido();
+                }
+                return inf;
+            }) 
+            var ree = await r
+            console.log(ree);
+            return ree
+        }
+
+        var infos = "";
+        var f = async function(clientes){
+
+        }
+        var painel = document.getElementById("adm-textarea");
+        painel.value = "";
+        for(cliente in clientes){
+            retrn(cliente).then(function(valor){
+                var painel = document.getElementById("adm-textarea");
+                painel.value += valor;
+                //console.log("Cliente:" + cliente + valor);
+                //infos += valor;
+            })
+            //await t;
+        }
+        return true;
+    });
+    var retorno = await ret;
+
+    //retorno.than()
+
+
+    console.log(retorno);
+    return retorno;
     /*
     A cada pedido lido do banco, atualiza o OBJ e chama-se o método para imprimir as informações a respeito do mesmo
     */
-    infos += pedido.info_do_pedido();
-    return infos;
+    
 }
 
-function listar_pedidos_fechados(){
-    var pedidosH;
-    // TODO coleta do banco de dados todos os pedidos fechados de todos os clientes
-    var infos = "";
-    /*
-    A cada pedido lido do banco, atualiza o OBJ e chama-se o método para imprimir as informações a respeito do mesmo
-    */
-    infos += pedido.info_do_pedido();
-    return infos;
+async function listar_pedidos_fechados(){
+    var pedidosA;
+    // TODO coleta do banco de dados todos os pedidos em aberto de todos os clientes
+   
+    var ret = window.database.get_clientes().then(function(clientes){
+        //Função anonima que retorna os pedidos de cada cliente
+        var retrn = async function(clien){
+            var r = window.database.select_pedidos_historico(clien).then(function(pedidos){
+                //console.log(pedidos);
+                var inf = "";
+                for(ped in pedidos){
+                    pedido._data = pedidos[ped].Data;
+                    pedido._numero = ped;
+                    pedido._quantidade = pedidos[ped].Quantidade;
+                    inf += pedido.info_do_pedido();
+                }
+                return inf;
+            }) 
+            var ree = await r
+            console.log(ree);
+            return ree
+        }
+        var painel = document.getElementById("adm-textarea");
+        painel.value = "";
+        for(cliente in clientes){
+            retrn(cliente).then(function(valor){
+                var painel = document.getElementById("adm-textarea");
+                painel.value += valor;
+                //console.log("Cliente:" + cliente + valor);
+                //infos += valor;
+            })
+            //await t;
+        }
+        return true;
+    });
+    var retorno = await ret;
+
+    //retorno.than()
+
+
+    console.log(retorno);
+    return retorno;
 }
 
 async function atender_ped(num){//ERRO
@@ -115,24 +190,25 @@ async function atender_ped(num){//ERRO
     var ret = window.database.busca_pedido(num).then(function(cnpj){
         if(cnpj != null){
             console.log("CNPJ:" + cnpj);
-            window.database.select_pedidos(cnpj).than(function(pedidos){
-                console.log(pedidos);
-                console.log("Teste");
+            window.database.select_pedidos(cnpj).then(function(pedidos){
+                //console.log(pedidos);
+                //console.log("Teste");
                 //console.log(pedidos[num]);
-                //pedido._data = (pedidos[num].Data);
-                //pedido._numero = (num);
-                //pedido._quantidade = (pedidos[num].Quantidade);
-                //remove_pedido(cnpj, num);
+                pedido._data = (pedidos[num].Data);
+                pedido._numero = (num);
+                pedido._quantidade = (pedidos[num].Quantidade);
                 //insert_historicopedido(cnpj, num, pedido.quantidade(), pedido.data());
                 return true;
             })
             .catch(function(){console.log("Catch do buscapedido");return false;});
+            //remove_pedido(cnpj, num);
         }else{
             return false;
         }
     }).catch(function(){return false;})
 
     retorno = await ret;
+    
     //remove_pedido(cnpj, num);
     //insert_historicopedido(cnpj, num, qtdade, data);
     
@@ -143,6 +219,7 @@ async function atender_ped(num){//ERRO
     //return true;
     //return false;
     console.log("Fim");
+    return retorno;
 }
 
 function excluir_ped(num){

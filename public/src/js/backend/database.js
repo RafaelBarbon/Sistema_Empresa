@@ -20,6 +20,23 @@ class Database{
         //const analytics = getAnalytics(app);
     }
 
+    async get_clientes(){
+        const db2 = ref(getDatabase());
+        var ret = get(child(db2,"Clientes"))//retorna uma promise
+                .then((snapshot)=>{
+                    if(snapshot.exists()){
+                        console.log(snapshot.val());
+                        return snapshot.val();
+                    }
+                    else{
+                        alert("Dado nao encontrado");
+                    }
+                })
+                .catch((error)=>{alert(error)});
+            var resul = await ret;
+            return resul;
+    }
+
     async get_adm(op){//OK
         const db2 = ref(getDatabase());
         var ret;
@@ -205,15 +222,34 @@ class Database{
 
 
     //madeira
-    insert_madeira(num, preco, idade, tipo){//OK
-    const db = getDatabase();
-    set(ref(db, "Madeira/" + num),{
-        Preco: preco,
-        Idade: idade,
-        Tipo: tipo
-    })
-        .then(function(){return true;})
-        .catch(function(error){return false;});
+
+    async get_madeira(){
+        const db2 = ref(getDatabase());
+        var ret = get(child(db2,"Madeira"))//retorna uma promise
+                .then((snapshot)=>{
+                    if(snapshot.exists()){
+                        return snapshot.val();
+                    }
+                    else{
+                        alert("Dado nao encontrado");
+                    }
+                })
+                .catch((error)=>{alert(error)});
+            var resul = await ret;
+            return resul;
+    }
+
+    async insert_madeira(num, preco, idade, tipo){//OK
+        const db = getDatabase();
+        var ret = set(ref(db, "Madeira/" + num),{
+            Preco: preco,
+            Idade: idade,
+            Tipo: tipo
+        })
+            .then(function(){return true;})
+            .catch(function(error){return false;});
+            var retorno = await ret;
+            return retorno;
     }
 
     /*
@@ -231,15 +267,17 @@ class Database{
             .catch((error)=>{alert(error)});
     }
 */
-    update_madeira(num, preco, idade, tipo){//OK
-    const db = getDatabase();
-    update(ref(db, "Madeira/" + num),{
-        Preco: preco,
-        Idade: idade,
-        Tipo: tipo
-    })
-        .then(function(){return true;})
-        .catch(function(error){return false;});
+    async update_madeira(num, preco, idade, tipo){//OK
+        const db = getDatabase();
+        var ret = update(ref(db, "Madeira/" + num),{
+            Preco: preco,
+            Idade: idade,
+            Tipo: tipo
+        })
+            .then(function(){return true;})
+            .catch(function(error){return false;});
+            var retorno = await ret;
+            return retorno;
     }
 
     remove_madeira(num){//OK

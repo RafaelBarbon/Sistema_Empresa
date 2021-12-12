@@ -38,14 +38,26 @@ class Madeira{
 
 var madeira = new Madeira(null,null,null,null);
 
-function listar_madeiras(){
-    var madeiras; // TODO coletar do banco de dados todas as madeiras cadastradas
+async function listar_madeiras(){
     var infos = "";
+    var ret = window.database.get_madeira().then(function(madeiras){
+        for(mad in madeiras){
+            madeira._cod = madeiras[mad].Codigo;
+            madeira._idade = madeiras[mad].Idade;
+            madeira._preco = madeiras[mad].Valor;
+            madeira._tipo = mad;
+            infos += madeira.info();
+        }
+        return infos;
+    })
+    .catch(function(){return false;});
+    retorno = await ret;
+    return retorno;
     /*
     A cada madeira coletada, atualizar as informações no OBJ e chamar o método para formatar as informações
     */
-    infos += madeira.info();
-    return infos;
+    //infos += madeira.info();
+    //return infos;
 }
 
 function remover_madeira(num){
@@ -55,16 +67,14 @@ function remover_madeira(num){
     return false;
 }
 
-function adicionar_madeira(num,preco,tipo,idade){
-    var wood; // TODO coletar no banco de dados para ver se já existe
-    // TODO se não existe, adiciona
-    return true;
-    return false;
+async function adicionar_madeira(num,preco,tipo,idade){
+    var ret = window.database.insert_madeira(num,preco,idade,tipo).then(function (){return true;})
+    var retorno = await ret;
+    return retorno;
 }
 
-function atualizar_madeira(num,preco,tipo,idade){
-    var wood; // TODO coletar no banco de dados para ver se existe
-    // TODO se existe, atualiza, conferindo se o valor não é ""
-    return true;
-    return false;
+async function atualizar_madeira(num,preco,tipo,idade){
+    var ret = window.database.update_madeira(num,preco,idade,tipo).then(function (){return true;})
+    var retorno = await ret;
+    return retorno;
 }
