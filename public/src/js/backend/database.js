@@ -231,7 +231,7 @@ class Database{
                         return snapshot.val();
                     }
                     else{
-                        alert("Dado nao encontrado");
+                        return false;
                     }
                 })
                 .catch((error)=>{alert(error)});

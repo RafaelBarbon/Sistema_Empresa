@@ -111,6 +111,7 @@ async function listar_consumidores(){
     let database = window.database;
     var ret = database.get_clientes().then(function(clientes){
             var txt = "";
+            var cliente = new Cliente(null,null,null,null,null,null);
             for(var cliente1 in clientes){
                 cliente.cnpj = cliente1;
                 cliente.senha = clientes[cliente1].Senha;

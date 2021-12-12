@@ -12,15 +12,6 @@ function login_adm(){
             alert("Email ou senha incorretos");
         }
     });
-    /*if(ADM.loginADM(log, sen)){
-        //Troca vizualização
-        document.getElementById("admlogin").style.visibility = "hidden";
-        document.getElementById("admswap").style.visibility = "visible";
-
-    }
-    else{
-        alert("Email ou senha incorretos");
-    }*/
 }
 
 function login_cliente(){
@@ -79,8 +70,8 @@ function listar_pedidosA(){
 
 function listar_clientes(){
     if(ADM.email != null){ // Confere se está logado
+        var painel = document.getElementById("adm-textarea");
         listar_consumidores().then(function(clientes){
-            var painel = document.getElementById("adm-textarea");
             painel.value = clientes;
         })
     }
